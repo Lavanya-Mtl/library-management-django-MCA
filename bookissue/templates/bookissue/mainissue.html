@@ -1,0 +1,95 @@
+{% extends 'members/index.html' %}
+{% load static %}
+
+{%block title%}
+    Issue books
+{%endblock title%}
+
+{% block content %}
+<div class="container">
+    <h1>Issue Book</h1>
+    <h1>{{message}}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-errors">{{ issue_error }}</div>
+        <div>
+            <div class="form-errors">{{ member_error }}</div>
+            <div class="form-grid">
+                <div>Username:</div>
+                <div>
+                    <select name="member_id">
+                        {% for m in members %}
+                            {% if member and m.id == member.id %}
+                                <option value="{{m.id}}" selected>{{m.username}}</option>
+                            {% else %}
+                                <option value="{{m.id}}">{{m.username}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% if member %}
+                <table>
+                    <tr>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Dues</th>
+                        <th>View</th>
+                    </tr>
+                    <tr>
+                        <td>{{ member.username }}</td>
+                        <td>{{ member.first_name }} {{ member.last_name }}</td>
+                        <td>{{ member.email }}</td>
+                        <td>{{ member.phone_number }}</td>
+                        <td>{{ member.dues }}</td>
+                        <td><a href="{% url 'members:view_member' id=member.id %}"><img src={% static "members/images/preview.png" %} class="symbol"></a></td>
+                    </tr>
+                </table>
+            {% endif %}
+        </div>
+        <div>
+            <div class="form-errors">{{ book_error }}</div>
+            <div class="form-grid">
+                <div>Book:</div>
+                <div>
+                    <select name="book_id">
+                        {% for b in books %}
+                            {% if book and b.id == book.id %}
+                                <option value="{{b.id}}" selected>{{b.book_id}}</option>
+                            {% else %}
+                                <option value="{{b.id}}">{{b.book_id}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% if book %}
+                <table>
+                    <tr>
+                        <th>BookID</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>View</th>
+                    </tr>
+                    <tr>
+                        <td>{{ book.book_id }}</td>
+                        <td> {{book.title}} </td>
+                        <td>{{ book.author }}</td>
+                        <td><a href="{% url 'books:view_book' id=book.id %}"><img src={% static "members/images/preview.png" %} class="symbol"></a></td>
+                    </tr>
+                </table>
+            {% endif %}
+        </div>
+        <div class="form-grid">
+            <div>Number of days:</div>
+            <div><input type="number" value="7" name="for_days"/></div>
+        </div>
+        <div class="actionpad">
+            <button type="submit" value="Fetch Data" name="fetch">Fetch Data</button>
+            <button type="submit" value="Issue Book" name="issuebook">Issue Book</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

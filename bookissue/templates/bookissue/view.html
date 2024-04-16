@@ -1,0 +1,79 @@
+{% extends 'bookissue/index.html' %}
+{% load static %}
+{%block title%}Issued book to member{%endblock title%}
+
+{% block content %}
+<div class="container">
+    <h1>Issued Book to member</h1>
+    {{ message }}
+    {% if bookissue %}
+    <div>
+        <h3>Book</h3>
+        <div>
+            <table>
+                <tr>
+                    <th>BookID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>View</th>
+                </tr>
+                <tr>
+                    <td>{{ bookissue.book.book_id }}</td>
+                    <td>{{ bookissue.book.title }}</td>
+                    <td>{{ bookissue.book.author }}</td>
+                    <td><a href="{% url 'books:view_book' id=bookissue.book.id %}"><img src={% static "members/images/preview.png" %} class="symbol"></a></td>
+                </tr>
+            </table>
+        </div>
+
+        <h3>Member</h3>
+        <div>
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Dues</th>
+                    <th>View</th>
+                </tr>
+                <tr>
+                    <td>{{ bookissue.member.username }}</td>
+                    <td>{{ bookissue.member.first_name }} {{ bookissue.member.last_name }}</td>
+                    <td>{{ bookissue.member.email }}</td>
+                    <td>{{ bookissue.member.phone_number }}</td>
+                    <td>{{ bookissue.member.dues }}</td>
+                    <td><a href="{% url 'members:view_member' id=bookissue.member.id %}"><img src={% static "members/images/preview.png" %} class="symbol"></a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <h3>Issue data</h3>
+            <table>
+                <tr>
+                    <th>Issued on</th>
+                    <th>For days</th>
+                    <th>Fine</th>
+                    
+                </tr>
+                <tr>
+                    <td>{{ bookissue.date_created }}</td>
+                    <td>{{ bookissue.for_days }}</td>
+                    <td>{{ fine }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <h3>Do you wish to return this book?</h3>
+            <div class="actionpad">
+            <button class="yes" type="submit" name="fine_unpaid">Return Book Without Paying Fine</button>
+            <button class="yes" type="submit" name="paid">Return Book With Fine Payed</button>
+        </div>
+    </form>
+
+    {% endif %}
+    </div>
+{% endblock content %}

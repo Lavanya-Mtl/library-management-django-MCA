@@ -1,0 +1,41 @@
+{% extends 'members/index.html' %}
+{% load static %}
+
+{%block title%}
+    Issued books
+{%endblock title%}
+
+
+{% block content %}
+<div class="container">
+    <div class="actionpad">
+        <a href="{% url 'bookissue:issuebook'%}"><button class="yes">Issue Book</button></a>
+        <a href="{% url 'bookissue:return'%}"><button class="yes">Return Book</button></a>
+    </div>
+    <h1>All Issued Books</h1>
+    <table>
+        <tr>
+            <th>BookID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Issued to member</th>
+            <th>Issued on </th>
+            <th>Email</th>
+            <th>Phone number </th>
+            <th>Open</th>
+        </tr>
+        {% for bookissue in bookissues %}
+        <tr>
+            <td>{{ bookissue.book.book_id }}</td>
+            <td>{{ bookissue.book.title }}</td>
+            <td>{{ bookissue.book.author }}</td>
+            <td>{{ bookissue.member.first_name }} {{ bookissue.member.last_name }} </td>
+            <td> {{ bookissue.date_created }}</td>
+            <td>{{ bookissue.member.email }} </td>
+            <td>{{ bookissue.member.phone_number }} </td>
+            <td><a href="{% url 'bookissue:view_bookissue' bookissueid=bookissue.id %}"><img src={% static "bookissue/images/more_info.png" %} class="symbol"></a></td>  
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}

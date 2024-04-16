@@ -1,0 +1,39 @@
+{% extends 'members/index.html' %}
+{% load static %}
+{% block title %} Add Penalty {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h1 class="form-errors">{{message}}</h1>
+    {% if member %}
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Dues</th>
+            <th>View</th>
+        </tr>
+        <tr>
+            <td>{{ member.username }}</td>
+            <td>{{ member.first_name }} {{ member.last_name }}</td>
+            <td>{{ member.email }}</td>
+            <td>{{ member.phone_number }}</td>
+            <td>{{ member.dues }}</td>
+            <td><a href="{% url 'members:view_member' id=member.id %}"><img src={% static "members/images/preview.png" %} class="symbol"></a></td>
+        </tr>
+    </table>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-grid">
+            <div>Enter amount of penalty</div>
+            <div><input type="number" name="dues"/></div>
+        </div>
+        <div class="actionpad">
+            <button type="submit" class="yes">Penalize</button>
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock content %}

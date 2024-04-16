@@ -1,0 +1,119 @@
+body,html {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+/*
+html {
+    background: url("../images/bg.jpeg") 0% 0 no-repeat fixed;
+} */
+
+h1 {
+    text-align: center;
+}
+.nav {
+    display:flex;
+    align-items: center;
+    background-color: #476e95;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    justify-content: space-between;
+  padding: 1em;
+}
+.left {
+    padding: 1.5em 1em;
+    color: #fff;
+    width: 100%;
+    margin: 5px;
+    margin-right: auto;
+    box-sizing: border-box;
+    
+}
+.highlighted {
+    text-decoration: none;
+    color: #fff;
+}
+.highlighted:hover {
+    background-color: #375a7c;
+}
+.container {
+    border-radius: 7px;
+    margin: 1%;
+    background-color: aliceblue;
+    padding: 1em 1em 4em 1em;
+}
+
+button {
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+.yes:hover {
+    background-color: #23c483;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+button:active {
+    transform: translateY(-1px);
+}
+
+.login {
+    padding: 10% 10px;
+    background-color: lavenderblush;
+    text-align: center;
+    font-size: 1em;
+   
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 1em;
+    
+}
+.form-grid >div {
+    margin: 0.5em;
+    padding: 1em 0;
+}
+.form-unit {
+    padding:1em;
+}
+.help {
+    color:#13273a9d;
+    margin:5px;
+}
+.help>ul, .form-errors>ul {
+    list-style-type: none;
+}
+.form-errors {
+    color: rgb(95, 0, 0);
+}
+input {
+    width: 100%;
+    padding: 1em;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+.footer {
+    margin-top: 2em;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0.5em;
+  }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Book</title>
+</head>
+<body>
+    {{ member_error }}
+    {{book_error}}
+    <form method="POST" id="form1">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td> Username </td>
+                <td>
+                    <select name="member_id">
+                        {% for m in members %}
+                            {% if member and m.id == member.id %}
+                                <option value="{{m.id}}" selected>{{m.username}}</option>
+                            {% else %}
+                                <option value="{{m.id}}">{{m.username}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            {% if member %}
+            <tr>
+                <td>Username</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Phone Number</td>
+                <td>Dues</td>
+            </tr>
+            <tr>
+                <td>{{ member.username }}</td>
+                <td>{{ member.first_name }} {{ member.last_name }}</td>
+                <td>{{ member.email }}</td>
+                <td>{{ member.phone_number }}</td>
+                <td>{{ member.dues }}</td>
+            </tr>
+            {% endif %}
+        </table>
+        <table>
+            <tr>
+                <td> Book </td>
+                <td>
+                    <select name="book_id">
+                        {% for b in books %}
+                            {% if book and b.id == book.id %}
+                                <option value="{{b.id}}" selected>{{b.book_id}}</option>
+                            {% else %}
+                                <option value="{{b.id}}">{{b.book_id}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            {% if book %}
+            <tr>
+                <td>Book ID</td>
+                <td>Title</td>
+                <td>Author</td>
+            </tr>
+            <tr>
+                <td>{{ book.book_id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                
+            </tr>
+            {% endif %}
+        </table>
+        <input type="number" value="7" name="for_days"/>
+        <input type="submit" value="Issue Book" name="issuebook"/>
+        <input type="submit" value="Fetch Data" name="fetch"/>
+        
+    </form>
+</body>
+</html>

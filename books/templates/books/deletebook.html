@@ -1,0 +1,33 @@
+{% extends 'books/index.html' %}
+{%block title%}Delete Book{%endblock title%}
+{% block content %}
+<div class="container">
+    
+    <h1>{{ message }}</h1>
+    {% if book %}
+        <form method="POST">
+            {% csrf_token %}
+            <h1>Are you sure you want to delete this book?</h1>
+            <table>
+                <tr>
+                    <th>BookID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                </tr>
+                
+                <tr>
+                    <td>{{ book.book_id }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                </tr>
+                
+            </table>
+            <div class="actionpad"><button type="submit" class="no">Yes</button> </div>
+        </form>
+        <div class="actionpad">
+            <a href="{% url 'books:view_book' id=book.id %}"><button class="yes">View Book</button></a>
+            <a href="{% url 'books:index' %}"><button class="yes">All Books</button></a>
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}

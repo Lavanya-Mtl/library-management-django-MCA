@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "account/css/style.css" %}">
+    <title>{% block title %}Login{% endblock title %}</title>
+</head>
+<body>
+    {% block nav %}
+    <div class="nav">
+        <div class="left">Library</div>
+        <a class="left highlighted" href="{% url 'account:register' %}">New Librarian? Register here!</a> 
+    </div>
+    {% endblock nav %}
+    {% block content %}
+    
+    {% endblock content %}
+    {% block footer %}
+        <div class="footer">@Library. All rights reserved.</div>
+    {% endblock footer %}
+</body>
+</html>

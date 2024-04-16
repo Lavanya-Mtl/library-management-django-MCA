@@ -1,0 +1,23 @@
+{% extends 'account/layout.html' %}
+
+{% block title %}
+Home 
+{% endblock title %}
+
+{% block nav %}
+<div class="nav">
+    <a class="left highlighted" href="{% url 'books:index' %}">Books</a>
+    <a class="left highlighted" href="{% url 'members:index' %}">Members</a>
+    <a class="left highlighted" href="{% url 'bookissue:index' %}">Issued books</a>
+    <a class="left highlighted" href="{% url 'account:register' %}">Register</a> 
+    <a class="left highlighted" href="{%url 'account:logout'%}">Logout</a>
+</div>
+{% endblock nav %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome, {{ request.user }}!</h1>
+</div>
+{% endblock content %}
+    
+    

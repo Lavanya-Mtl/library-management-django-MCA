@@ -1,0 +1,70 @@
+{% extends 'members/index.html' %}
+{% load static %}
+{% block title %} View Member {% endblock title %}
+{% block content %}
+
+<div class="container">
+    <h1 class="form-errors">{{message}}</h1>
+    {% if book %}
+    <table>
+        <tr>
+            <th>BookID</th>
+            <th>Title</th>
+            <th>Author</th>
+        </tr>
+        <tr>
+            <td>{{ book.book_id }}</td>
+            <td> {{book.title}} </td>
+            <td>{{ book.author }}</td>
+        </tr>
+    </table>
+    <div class="actionpad">
+        <a href="{% url 'books:book_to_member' id=book.id %}"><button class="yes">Issue to Member</button></a>
+        <a href="{% url 'books:edit_book' id=book.id %}"><button class="yes">Edit Book Details</button></a>
+        <a href="{% url 'books:delete_book' id=book.id %}"><button class="no">Delete Book</button></a>
+    </div>
+    {{issuemessage}}
+    {% if bookissue %}
+        <h2>This book has been issued by a member currently</h2>
+    <div>
+        <h3>Member</h3>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Dues</th>
+                <th>View</th>
+            </tr>
+            <tr>
+                <td>{{ bookissue.member.username }}</td>
+                <td>{{ bookissue.member.first_name }} {{ bookissue.member.last_name }}</td>
+                <td>{{ bookissue.member.email }}</td>
+                <td>{{ bookissue.member.phone_number }}</td>
+                <td>{{ bookissue.member.dues }}</td>
+                <td><a href="{% url 'members:view_member' id=bookissue.member.id %}"><img src={% static "members/images/preview.png" %} class="symbol"></a></td>
+        </table>
+    </div>
+    <div>
+        <h3>Issue data</h3>
+        <table>
+            <tr>
+                <th>Issued on</th>
+                <th>For days</th>
+                <th>Fine</th>
+                <th>Manage</th>
+            </tr>
+            <tr>
+                <td>{{ bookissue.date_created }}</td>
+                <td>{{ bookissue.for_days }}</td>
+                <td>{{ fine }}</td>
+                <td><a href="{% url 'bookissue:view_bookissue' bookissueid=bookissue.id %}"><img src={% static "bookissue/images/more_info.png" %} class="symbol"></a></td>
+            </tr>
+        </table>
+    </div>
+    {% endif %}
+    
+    {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends 'account/layout.html' %}
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock title %}
+
+    
+{% block content %}
+    <div class="container">
+        <h1>Login</h1>
+    <form class="login" method="post">
+        {% csrf_token %}
+        <div class="form-grid">
+            <div>Username:</div><div><input type="text" name="username"></div>
+            <div>Password:</div><div><input type="password" name="password"></div>
+        </div>
+        <div><button class="yes" type="submit" value="Login">Login</button></div>
+    </form>
+</div>
+{% endblock content %}

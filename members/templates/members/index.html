@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}Members{%endblock title%}</title>
+    <link rel="stylesheet" href="{% static "members/css/style.css" %}">
+</head>
+<body>
+    {% block nav %}
+        <nav class="nav">
+            <a class="left" href="{% url 'account:home' %}">Home</a>
+            <a class="left" href="{% url 'members:index' %}">All Members</a>
+            <a class="left" href="{% url 'books:index' %}">All Books</a>
+            <a class="left" href="{% url 'bookissue:index' %}"> All Issue Data</a>
+            <a class="right" href="{% url 'account:logout' %}">Logout</a>
+        </nav>
+    {% endblock nav %}
+    
+        
+   
+    
+   
+       
+
+    {% block content %}
+    <div class="container">
+        
+        <h1>All Members</h1>
+        <div class="actionpad"><a href="{% url 'members:add_member'%}"><button class="yes">Add New Member</button></a></div>
+    <table align="center">
+        <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Dues</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% for member in members %}
+        <tr>
+            <td>{{ member.username }}</td>
+            <td>{{ member.first_name }} {{ member.last_name }}</td>
+            <td>{{ member.email }}</td>
+            <td>{{ member.phone_number }}</td>
+            <td>{{ member.dues }}</td>
+            <td><a href="{% url 'members:view_member' id=member.id %}"><img src={% static "members/images/preview.png" %} class="symbol"></a></td>
+            <td><a href="{% url 'members:edit_member' id=member.id %}"><img src={% static "members/images/edit-symbol.png" %} class="symbol"></a></td>
+            <td><a href="{% url 'members:delete_member' id=member.id %}"><img src={% static "members/images/delete-symbol.png" %} class="symbol"></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+    {% endblock content %}
+
+    {% block footer %}
+        <div class="footer">@Library. All rights reserved. Logged in as {{ request.user }} </div>
+    {% endblock footer %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends 'books/index.html' %}
+{%block title%}Edit Book{%endblock title%}
+{% block heading %}
+    <h1>Edit Book</h1>
+{% endblock heading %}
+{% block content %}
+<div class="container">
+    <h1 class="form-errors">{{message}}</h1>
+    {% if form %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-errors">{{ form.non_field_errors }}</div>
+        <table>
+            {% for field in form %}
+                <tr>
+                    <td>{{ field.label_tag }} </td><td>{{ field }}</td><td class="form-errors">{{ field.errors }}</td>
+                </tr>
+            {% endfor %}
+        
+        </table>
+        <div class="actionpad"><button type="submit" class="yes">Edit Book</button></div>
+    </form>
+    <div class="actionpad">
+        <a href="{% url 'books:view_book' id=id %}"><button class="yes">View Book</button></a>
+        <a href="{% url 'books:index' %}"><button class="yes">All Books</button></a>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

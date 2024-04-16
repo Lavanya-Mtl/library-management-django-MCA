@@ -1,0 +1,34 @@
+{% extends 'account/layout.html' %}
+
+
+    {% block title %} Register{% endblock title%}
+
+    {% block nav %}
+    <div class="nav">
+        <div class="left">Library</div>
+        <a class="left highlighted" href="{% url 'account:login' %}">Login</a> 
+    </div>
+    {% endblock nav %}
+{% block content %}
+    <div class="container">
+    <h1>Registeration</h1>
+
+    <form class="login" method="POST">
+        {% csrf_token %}
+        
+
+            <div class="form-errors" >{{ form.non_field_errors }}</div>
+            {% for field in form %}
+            <div class="form-unit">
+                <div class="form-errors">{{ field.errors }}</div>
+                <div class="form-grid">{{ field.label_tag }} {{ field }}</div>
+                {% if field.help_text %}
+                    <div class="help">{{ field.help_text|safe }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        
+        <button class="yes" type="submit" value="Register">Register</button>
+    </form>
+</div>
+{% endblock content %}

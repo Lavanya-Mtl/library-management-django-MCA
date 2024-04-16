@@ -1,0 +1,38 @@
+{% extends 'members/index.html' %}
+{% load static %}
+
+{%block title%}
+    Books
+{%endblock title%}
+
+
+{% block content %}
+<div class="container">
+    <h1>All Books</h1>
+    <div class="actionpad"><a href="{% url 'books:add_book'%}"><button class="yes">Add New Book</button></a></div>
+    <table>
+        <tr>
+            <th>BookID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.book_id }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td><a href="{% url 'books:view_book' id=book.id %}"><img src={% static "members/images/preview.png" %} class="symbol"></a></td>
+            <td><a href="{% url 'books:edit_book' id=book.id %}"><img src={% static "members/images/edit-symbol.png" %} class="symbol"></a></td>
+            <td><a href="{% url 'books:delete_book' id=book.id %}"><img src={% static "members/images/delete-symbol.png" %} class="symbol"></a></td>
+        
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}
+
+    
+    

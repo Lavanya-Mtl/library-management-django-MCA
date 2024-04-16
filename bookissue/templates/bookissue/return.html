@@ -1,0 +1,103 @@
+{% extends 'bookissue/index.html' %}
+{% load static %}
+
+{% block title %}Return Book{% endblock title %}
+{% block content %}
+<div class="container">
+    <h1 class="form-errors">{{message}}</h1>
+
+    
+    <form method="POST">
+        {% csrf_token %}
+        {% if books and members %}
+        <div>
+            <div class="form-grid">
+                <div>By Username </div>
+                <div>
+                    <select name="member_id">
+                        {% for member in members %}
+                            {% if issue and member.id == issue.member.id %}
+                                <option value={{member.id}} selected>{{member.username}}</option>
+                            {% else %}
+                                <option value={{member.id}}>{{member.username}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="actionpad"><button class="yes" type="submit" value="Search by member" name="search_member">Search by Member</button></div>
+        </div>
+        <div>
+            <div class="form-grid">
+                <div>By Book ID </div>
+                <div>
+                    <select name="book_id">
+                        {% for book in books %}
+                            {% if issue and book.id == issue.book.id %}
+                                <option value={{book.id}} selected>{{book.book_id}}</option>
+                            {% else %}
+                                <option value={{book.id}}>{{book.book_id}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="actionpad"><button class="yes" type="submit" value="Search by book" name="search_book">Search by book</button></div>
+        </div>
+        {% endif %}
+        {% if issue %}
+            <h2>Member Details</h2>
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Dues</th>
+                    <th>View</th>
+                </tr>
+                <tr>
+                    <td>{{ issue.member.username }}</td>
+                    <td>{{ issue.member.first_name }} {{ member.last_name }}</td>
+                    <td>{{ issue.member.email }}</td>
+                    <td>{{ issue.member.phone_number }}</td>
+                    <td>{{ issue.member.dues }}</td>
+                    <td><a href="{% url 'members:view_member' id=issue.member.id %}"><img src={% static "members/images/preview.png" %} class="symbol"></a></td>
+                </tr>
+            </table>
+            <h2>Book Details</h2>
+            <table>
+                <tr>
+                    <th>Book ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>View</th>
+                </tr>
+                <tr>
+                    <td>{{ issue.book.book_id }}</td>
+                    <td>{{ issue.book.title }}</td>
+                    <td>{{ issue.book.author }}</td>
+                    <td><a href="{% url 'books:view_book' id=issue.book.id %}"><img src={% static "members/images/preview.png" %} class="symbol"></a></td>
+                </tr>
+            </table>
+            <h2>Issue Details</h2>
+            <table>
+                <tr>
+                    <th>Issued on Date</th>
+                    <th> For Days </th>
+                    <th>Fine</th>
+                </tr>
+                <tr>
+                    <td>{{ issue.date_created }}</td>
+                    <td>{{ issue.for_days }}</td>
+                    <td>{{ fine  }}</td>
+                </tr>
+            </table>
+            <div class="actionpad">
+                <button type="submit" class="yes" value="{{issue.id}}" name="fine_unpaid">Return Book Without Paying Fine</button>
+                <button type="submit" class="yes" value="{{issue.id}}" name="paid">Return Book With Fine Payed</button>
+            </div>
+        {% endif %}
+    </form>
+</div>
+{% endblock content %}

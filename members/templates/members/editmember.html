@@ -1,0 +1,33 @@
+{% extends 'members/index.html' %}
+{%block title%}Edit Member{%endblock title%}
+{% block heading %}
+    <h1>Edit Member</h1>
+{% endblock heading %}
+{% block content %}
+<div class="container">
+{{ message }}
+{% if form %}
+    <h1>Edit Member</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            <div class="form-errors">{{ form.non_field_errors }}</div>
+            {% for field in form %}
+            <tr>
+                <td>{{ field.label_tag }} </td><td>{{ field }}</td>
+                {% if field.help_text %}
+                    <td class="help">{{ field.help_text|safe }}</td>
+                {% endif %}
+                <td class="form-errors">{{ field.errors }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="actionpad"><button class="yes" type="submit">Edit Member</button></div>
+    </form>
+    <div class="actionpad">
+        <a href="{% url 'members:view_member' id=id %}"><button class="yes">View member</button></a>
+        <a href="{% url 'members:index' %}"><button class="yes">All Members</button></a>
+    </div>
+{% endif %}
+</div>
+{% endblock content %}
