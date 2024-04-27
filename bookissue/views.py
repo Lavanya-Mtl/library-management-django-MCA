@@ -118,22 +118,7 @@ def return_book(request):
                 return render(request,'bookissue/return.html',context={'message':'Book returned successfully','books':Book.objects.all(),'members':Member.objects.all()})
             except ObjectDoesNotExist:
                 return render(request,'bookissue/return.html',context={'message':'Data on issuing the book to the member not found'})
-        """elif 'proceed' in request.POST:
-            try:
-                issue = BookIssue.objects.get(id=request.POST['proceed'])
-                days_due = (timezone.now()-issue.date_created).days - issue.for_days
-                fine=0
-                if days_due>0:
-                    fine = days_due
-                member = issue.member
-                member.dues = fine
-                member.save()
-                context = {'issue':issue}
-                return render(request,'bookissue/return.html',context=context)
-            except ObjectDoesNotExist:
-                return render(request,'bookissue/return.html',context={'message':'Data on issuing the book to the member not found'}) """   
         
-
 
 @login_required(login_url='account:login')
 def index(request):

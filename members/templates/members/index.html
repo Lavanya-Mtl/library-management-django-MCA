@@ -17,16 +17,8 @@
             <a class="right" href="{% url 'account:logout' %}">Logout</a>
         </nav>
     {% endblock nav %}
-    
-        
-   
-    
-   
-       
-
     {% block content %}
     <div class="container">
-        
         <h1>All Members</h1>
         <div class="actionpad"><a href="{% url 'members:add_member'%}"><button class="yes">Add New Member</button></a></div>
     <table align="center">
@@ -55,9 +47,8 @@
     </table>
     </div>
     {% endblock content %}
-
     {% block footer %}
-        <div class="footer">@Library. All rights reserved. Logged in as {{ request.user }} </div>
+        <div class="footer">@Lavanya's Library. All rights reserved. Developed by Lavanya Matlani. Logged in as {{ request.user }} </div>
     {% endblock footer %}
 </body>
 </html>
